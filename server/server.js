@@ -19,7 +19,7 @@ app.use(require('./routers/index'));
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'me',
-    password: 'secret',
+    password: '',
     database: 'my_db'
 });
 
