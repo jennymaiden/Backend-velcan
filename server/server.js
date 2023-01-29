@@ -17,10 +17,10 @@ app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(require('./routers/index'));
 
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'me',
-    password: '',
-    database: 'my_db'
+    host: 'us-cdbr-east-06.cleardb.net',
+    user: 'b64d10e31ed044',
+    password: '8acebae2',
+    database: 'heroku_deccf2eb356432b'
 });
 
 connection.connect();
