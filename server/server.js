@@ -14,9 +14,9 @@ app.use(bodyParser.json())
 app.use(express.static(path.resolve(__dirname, '../public')));
 
 // Configuracion global de rutas
-app.use(require('./routes/index'));
+app.use(require('./routers/index'));
 
-mysql.createConnection({
+var connection = mysql.createConnection({
     host: 'localhost',
     user: 'me',
     password: 'secret',

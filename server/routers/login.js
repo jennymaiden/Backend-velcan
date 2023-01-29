@@ -2,8 +2,6 @@
  * Controlador del login para usuar los Tokens de autenticacion
  */
 const express = require('express');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const Usuario = require('./../models/Usuario');
 const app = express();
 
@@ -33,7 +31,7 @@ app.post('/login', function (req, res) {
          }
  
          //Evaluar la contraseña
-         if (!bcrypt.compareSync(body.password, usuarioDB.password)) {
+         if (body.password == usuarioDB.password) {
              return res.status(400).json({
                  ok: false,
                  err: {
