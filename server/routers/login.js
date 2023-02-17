@@ -2,51 +2,37 @@
  * Controlador del login para usuar los Tokens de autenticacion
  */
 const express = require('express');
-const Usuario = require('./../models/Usuario');
+const ControllerLogin = require('./../controller/ControllerLogin');
 const app = express();
 
 //Crear peticiones POST
 app.post('/login', function (req, res) {
 
-     //Obtener el body que me envian
-     let body = req.body;
+    //Obtener el body que me envian
+    const body = req.body;
+    ControllerLogin.getLogin(body, (err, result) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+        
+        if (result.length === 0) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'Usuario o contraseña incorrecta'
+                }
+            });
+        }
 
-     //Realizar la consulta a la base de datos
-     Usuario.findOne({ email: body.email }, (err, usuarioDB) => {
- 
-         if (err) {
-             return res.status(400).json({
-                 ok: false,
-                 err
-             });
-         }
- 
-         if (!usuarioDB) {
-             return res.status(400).json({
-                 ok: false,
-                 err: {
-                     message: 'Usuario o contraseña incorrecta'
-                 }
-             });
-         }
- 
-         //Evaluar la contraseña
-         if (body.password == usuarioDB.password) {
-             return res.status(400).json({
-                 ok: false,
-                 err: {
-                     message: 'Usuario o contraseña incorrecta.'
-                 }
-             });
-         }
-
-         // Autenticacion exitosa
-         res.json({
+        res.json({
             ok: true,
-            usuario: usuarioDB,
-            token,
+            usuario: result
         })
-    })
+       
+    });
 })
 
 module.exports = app;

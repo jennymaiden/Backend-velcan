@@ -1,4 +1,5 @@
 require('./config/config');
+require("dotenv").config;
 const express = require('express')
 const app = express()
 const mysql = require('mysql');
@@ -15,15 +16,6 @@ app.use(express.static(path.resolve(__dirname, '../public')));
 
 // Configuracion global de rutas
 app.use(require('./routers/index'));
-
-var connection = mysql.createConnection({
-    host: 'us-cdbr-east-06.cleardb.net',
-    user: 'b64d10e31ed044',
-    password: '8acebae2',
-    database: 'heroku_deccf2eb356432b'
-});
-
-connection.connect();
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto', process.env.PORT);

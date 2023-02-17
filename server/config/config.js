@@ -11,16 +11,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 /**
  * Base de datos
  */
-let urlDB;
-
-if (process.env.NODE_ENV === 'dev') {
-    urlDB = 'mongodb://localhost:27017/cafe';
-} else {
-    urlDB = process.env.MONGO_URI;
-
-}
-
-process.env.URLDB = urlDB;
+process.env.JAWSDB_URL='mysql://lvma614dmwbt85v7:zppm4hysxmnz2zxp@en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/m7zujshvs1rmr4rb'
 
 /**
  * Fecha de expiracion del token

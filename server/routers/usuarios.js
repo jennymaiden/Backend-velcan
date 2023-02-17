@@ -2,34 +2,33 @@
  * Controlador de crud de usuarios
  */
 const express = require('express');
-const Usuario = require('./../models/Usuario');
+
+const ControllerUsuer = require('./../controller/ControllerUsuario');
 const app = express();
 
 // Peticion GET para consultar los usuarios
-app.get('/usuarios', function(req, res) {
+app.get('/usuarios', function (req, res) {
 
-    Usuario.find( 'nombre email role estado google img')
-        .skip(desde)
-        .limit(limite)
-        .exec((err, usuarios) => {
-            if (err) {
-                return res.status(400).json({
-                    ok: false,
-                    err
-                });
-            }
-
-            Usuario.count( (err, conteo) => {
-                res.json({
-                    ok: true,
-                    usuarios,
-                    cuantos: conteo
-                })
-
-            });
-
-        })
-        //res.json('get usuario')
+    ControllerUsuer.getUsuarios((result) => {
+        res.json(result);
+    });
 });
 
+// Peticion POST para agregar los usuarios
+app.post("/usuarios", (req, res) => {
+    const user = {
+        nombreCompleto: req.body.nombre,
+        userName: req.body.userName,
+        password: req.body.password,
+        direccion: req.body.direccion,
+        telefono: req.body.telefono
+      };
+
+    ControllerUsuer.insert(
+        user,
+        (result) => {
+            res.json(result);
+        }
+    );
+});
 module.exports = app;
